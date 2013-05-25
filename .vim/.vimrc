@@ -1,7 +1,46 @@
-call pathogen#infect('bundle')
+set nocompatible " Required for Vundle awesomeness
+filetype off     " Required for Vundle awesomeness
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-"Note when ~/.vimrc present the following is done automatically
-"set nocompatible
+" OS Declaration
+try
+  source ~/.vim/rc/os.vim
+catch
+endtry
+
+" Offload bundle declaration into another file for clean RC
+try
+  source ~/.vim/rc/bundle.vim
+catch
+endtry
+
+" Hotkeys!!!
+try
+  source ~/.vim/rc/hotkeys.vim
+catch
+endtry
+
+" Layout declarations
+try
+  source ~/.vim/rc/layout.vim
+catch
+endtry
+
+" Backup and Swap spaces
+set backupdir=$HOME/.vim/backup//
+set directory=$HOME/.vim/swap//
+
+" Persistent undo
+try
+  set undofile
+  set undodir=$HOME/.vim/undodir//
+catch
+endtry
+
+" Better wrapped-line suppert
+set display+=lastline
+let &showbreak=repeat('> ', 5)
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
     set fileencodings=utf-8,latin1
@@ -27,17 +66,11 @@ if has("autocmd")
   \   exe "normal g'\"" |
   \ endif
 endif
-"This is necessary to allow pasting from outside vim. It turns off auto stuff.
-"You can tell you are in paste mode when the ruler is not visible
-set pastetoggle=<F2>
+
 "Usually annoys me
 set nowrap
 "Usually I don't care about case when searching
-set ignorecase
-"Only ignore case when we type lower case when searching
 set smartcase
-"I hate noise
-"set visualbell
 "Show menu with possible tab completions
 set wildmenu
 "Ignore these files when completing names and in Explorer
@@ -69,8 +102,7 @@ set nojoinspaces
 
 "I always work on dark terminals
 set background=dark
-" Add Solarized colour scheme
-colorscheme solarized
+colorscheme molokai
 
 "Make the completion menus readable
 highlight Pmenu ctermfg=0 ctermbg=3
@@ -194,8 +226,7 @@ au BufWritePre *.gpg :%!gpg -e -r 'P@draigBrady.com' 2>/dev/null
 au BufWritePost *.gpg u
 
 filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 augroup sh
     au!
@@ -236,7 +267,10 @@ set cursorline
 set laststatus=2 " Always show status bar
 set nowrap
 
-let Powerline_colorscheme="skwp"
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+
+"let Powerline_colorscheme="default"
+"let Powerline_colorscheme="default"
 let g:Powerline_symbols = 'fancy'
 
 if &term =~ "xterm"
