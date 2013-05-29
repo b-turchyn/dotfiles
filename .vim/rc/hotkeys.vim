@@ -7,4 +7,4 @@ nmap <F8> :TagbarToggle<CR>
 :map <C-O> <C-W>
 
 " Numbers.vim
-nnoremap <F3> :NumbersToggle<CR>
+nmap <F3> :NumbersToggle<CR>

@@ -273,6 +273,8 @@ set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
 "let Powerline_colorscheme="default"
 let g:Powerline_symbols = 'fancy'
 
+set term=screen-256color
+
 if &term =~ "xterm"
   set t_Co=256
   if has("terminfo")
