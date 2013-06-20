@@ -27,6 +27,12 @@ try
 catch
 endtry
 
+" Snippets
+try
+  source ~/.vim/rc/snippets.vim
+catch
+endtry
+
 " Backup and Swap spaces
 set backupdir=$HOME/.vim/backup//
 set directory=$HOME/.vim/swap//
@@ -45,6 +51,8 @@ let &showbreak=repeat('> ', 5)
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
     set fileencodings=utf-8,latin1
 endif
+
+au VimLeave * :!clear
 
 " Show line numbers
 set number

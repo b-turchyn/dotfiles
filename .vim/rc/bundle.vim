@@ -47,6 +47,13 @@ Bundle "tpope/vim-git"
 Bundle "tpope/vim-markdown"
 Bundle "kchmck/vim-coffee-script"
 
+" Snippets
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+Bundle "bonsaiben/bootstrap-snippets"
+
 " Other
 Bundle "benmills/vimux"
 Bundle "dahu/LearnVim"

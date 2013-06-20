@@ -7,4 +7,23 @@ nmap <F8> :TagbarToggle<CR>
 :map <C-O> <C-W>
 
 " Numbers.vim
-nmap <F3> :NumbersToggle<CR>
+nnoremap <F3> :NumbersToggle<CR>
+
+" Support for YCM + Ultisnips/Snipmate
+" Source: https://github.com/Valloric/YouCompleteMe/issues/36
+function! g:UltiSnips_Complete()
+  call UltiSnips_JumpForwards()
+  if g:ulti_jump_forwards_res == 0
+    call UltiSnips_ExpandSnippet()
+    if g:ulti_expand_res == 0
+      if pumvisible()
+        return "\<C-n>"
+      else
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
