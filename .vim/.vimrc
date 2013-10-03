@@ -275,7 +275,7 @@ set cursorline
 set laststatus=2 " Always show status bar
 set nowrap
 
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 "let Powerline_colorscheme="default"
 "let Powerline_colorscheme="default"
