@@ -30,3 +30,9 @@ nnoremap <F3> :NumbersToggle<CR>
 
 " Vimux -- Run rake
 nmap <F12> :call VimuxRunCommand("rake")<CR>
+" Go to tag in current file
+inoremap <Leader>t <Esc>:CtrlPBufTag<CR>
+" Save/Quit
+map <C-s> :w<CR>
+map <C-q> :q<CR>
+map <C-S-q> :q!<CR>
