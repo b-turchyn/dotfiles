@@ -15,7 +15,6 @@ Bundle 'altercation/vim-colors-solarized'
 " UI Addons
 Bundle 'Lokaltog/powerline'
 Bundle 'myusuf3/numbers.vim'
-Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
 
 " VCS Integration
@@ -48,9 +47,9 @@ Bundle "tpope/vim-markdown"
 Bundle "kchmck/vim-coffee-script"
 
 " Snippets
+Bundle 'SirVer/ultisnips'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
 Bundle "bonsaiben/bootstrap-snippets"
 
