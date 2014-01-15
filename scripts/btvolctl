@@ -1,0 +1,35 @@
+#! /usr/bin/env ruby
+
+##############################################
+# Volume control script                      #
+# v0.1                                       #
+# Utilizes Pulseaudio's pacmd utility to     #
+# raise and lower the volume in 2%           #
+# increments, configurable via a constant.   #
+#                                            #
+# Written 2013-12-29                         #
+##############################################
+INCREMENT_PERCENT = ( ARGV[1] ? ARGV[1].to_i : 2 )
+VOL_MAX = 65536
+VOL_PERCENT = ( VOL_MAX / 100 )
+DIRECTION = ARGV[0]
+
+abort('Increment amount not a valid number') unless INCREMENT_PERCENT.is_a?(Numeric) && INCREMENT_PERCENT != 0
+abort('Increment direction must be one of [ud]') unless %w(u d).include?(DIRECTION)
+
+increment_amount = VOL_PERCENT * INCREMENT_PERCENT
+line = `pacmd dump-volumes | grep \"Sink 0\"`.split(/\s+/)
+vol = line[6].gsub('%', '').to_i * VOL_PERCENT
+
+if ARGV[0] == 'u'
+  vol += increment_amount
+elsif ARGV[0] == 'd'
+  vol -= increment_amount
+end
+
+# Overage protection
+vol = ( vol > VOL_MAX ? VOL_MAX : vol )
+# Underage protection
+vol = ( vol < 0 ? 0 : vol )
+
+`pacmd set-sink-volume 0 #{vol}`
