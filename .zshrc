@@ -14,6 +14,7 @@ DEFAULT_USER="brian@dev-environment"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias :wq="sl -a && exit"
 alias :w="sl -a && exit"
+alias gls="git status"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
