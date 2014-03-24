@@ -22,3 +22,5 @@ To install the dotfiles...
     git submodule init
     git submodule update
     rake install
+    vim -c :BundleInstall      # Expect errors during the first startup here
+
