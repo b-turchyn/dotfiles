@@ -8,7 +8,7 @@ task :install do
   replace_all = false
   Dir['*'].each do |file|
     next if %w[Rakefile README LICENSE id_rsa.pub].include? file
-    
+
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
         replace_file(file)
@@ -36,11 +36,16 @@ task :install do
   system %Q{rm "$HOME/.ssh/id_rsa.pub"}
   system %Q{ln -s "$PWD/id_rsa.pub" "$HOME/.ssh/id_rsa.pub"}
 
+  puts "Creating local tmp directory"
+  system %Q{mkdir ~/.tmp}
+
+  puts "Creating special Vim folders"
+  system %Q{mkdir -p ~/.vim/swap ~/.vim/undodir ~/.vim/backup}
+
   # Need to do this to make vim use RVM's ruby version
   puts "Moving zshenv to zshrc"
   system %Q{sudo mv /etc/zshenv /etc/zshrc}
 
-  system %Q{mkdir ~/.tmp}
 end
 
 def replace_file(file)
