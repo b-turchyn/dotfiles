@@ -2,66 +2,116 @@
 #
 # Example panel for LemonBoy's bar
 
+# Using the vars (left|right)_(left|centre|right) to control position
+
 while read -r line ; do
     case $line in
         S*)
             # clock output
-            sys_infos="\\br\\f6${line#?}"
+            clock="\\f6\\f0\\u6\\b6 ${line#?}"
             ;;
         T*)
             # xtitle output
             title="\\br\\f7${line#?}"
             ;;
+        Z*)
+            # Now Playing
+            now_playing="\\u6\\b6\\f0\\ab${line#?}\\ac~/scripts/panel/now_playing_click\\ae \\f6\\br\\ur"
+            ;;
+        L*)
+            # System Load
+            system_load="${line#?}"
+            ;;
+        M*)
+          # Memory Usage
+          memory="⭦${line#?} \\f8⮃\\f0"
+          ;;
+        N*)
+          # Network IPs
+          network="${line#?} \\f8⮃\\f0"
+          ;;
+        C*)
+          # CPU Usage
+          cpu="⭥${line#?} \\f8⮃\\f0"
+          ;;
+        E*)
+            temperature="\\f4\\f0\\u4\\b4 ${line#?} \\f8⮃\\f0"
+          ;;
         W*)
             # bspwm internal state
-            wm_infos=""
+            screen="l"
+            wm_info_left=""
+            wm_info_right=""
             IFS=':'
             set -- ${line#?}
             while [ $# -gt 0 ] ; do
                 item=$1
                 name=${item#?}
+                wm_infos=""
                 case $item in
                     O*)
                         # focused occupied desktop
-                        wm_infos="$wm_infos \\u3\\br\\fr${name}\\ur"
+                        wm_infos=" \\u2\\br\\fr${name}\\ur"
                         ;;
                     F*)
                         # focused free desktop
-                        wm_infos="$wm_infos \\u4\\br\\f7${name}\\ur"
+                        wm_infos=" \\u2\\br\\f8${name}\\ur"
                         ;;
                     U*)
                         # focused urgent desktop
-                        wm_infos="$wm_infos \\u9\\br\\fr${name}\\ur"
+                        wm_infos=" \\u2\\b1\\fr${name}\\ur"
                         ;;
                     o*)
                         # occupied desktop
-                        wm_infos="$wm_infos \\br\\fr${name}"
+                        wm_infos=" \\br\\fr\\ab${name}"
                         ;;
                     f*)
                         # free desktop
-                        wm_infos="$wm_infos \\br\\f7${name}"
+                        wm_infos=" \\br\\f8${name}\\fr"
                         ;;
                     u*)
                         # urgent desktop
-                        wm_infos="$wm_infos \\b1\\fr${name}"
+                        wm_infos=" \\b1\\fr${name}"
                         ;;
                     L*)
                         # layout
                         layout=$(printf "%s" "${name}" | sed 's/\(.\).*/\U\1/')
-                        wm_infos="$wm_infos    \\br\\f6$layout"
+                        wm_info_right="$wm_info_right  \\br\\f6$layout"
                         ;;
                     *HDMI2*)
                         # Left monitor
-                        wm_infos="$wm_infos\\sr"
+                        screen="l"
                         ;;
                     *HDMI3*)
                         # Right monitor
-                        wm_infos="$wm_infos\\sl"
+                        screen="r"
                         ;;
                 esac
                 shift
+
+                case $screen in
+                  l)
+                    wm_info_left="$wm_info_left $wm_infos"
+                    ;;
+                  r)
+                    wm_info_right="$wm_info_right $wm_infos"
+                    ;;
+                esac
             done
             ;;
     esac
-    printf "%s\n" "\\l $wm_infos \\c $title \\r $sys_infos  "
+
+    right_right="$temperature $network $cpu $memory $system_load $clock "
+    left_left=" $now_playing"
+    left_centre="\\f00\\f11\\f22\\f33\\f44\\f55\\f66\\f77\\f88\\f99\\fr"
+    left_right="$wm_info_left "
+
+    printf "%s\n" \
+      "\\l$wm_info_right $right_left\\c$title\\r$right_right\\sn\\l\\f2$left_left\\c$left_centre\\r$left_right\\ab \\aca\\ae"
+      #"$wm_info_right $right_left " \
+      #"$title " \
+      #"$system_load $clock " \
+      #"$now_playing " \
+      #"" \
+      #"$wm_info_left "
 done
