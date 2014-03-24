@@ -5,6 +5,7 @@ Turns your Tmux+Vim experience into this!
 
 Requirements
 ------------
+* [RVM](https://rvm.io)
 * [Zsh](http://www.zsh.org)
 * [Oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 * [Tmux](http://tmux.sourceforge.net/)
@@ -15,5 +16,9 @@ Requirements
 Installation
 ------------
 To install the dotfiles...
-    cp -R .vim .tmux.conf .tmux.conf.local .zshrc $HOME
-    ln -s $HOME/.vim/.vimrc $HOME/.vimrc
+
+    git clone https://github.com/b-turchyn/dotfiles.git dotfiles
+    cd dotfiles
+    git submodule init
+    git submodule update
+    rake install
