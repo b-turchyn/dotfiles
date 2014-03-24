@@ -1,10 +1,24 @@
 " Tagbar Awesomeness
 nmap <F8> :TagbarToggle<CR>
 " Leader tag
-:let mapleader = ","
+let mapleader = ","
 
-" Remap Ctrl+W to Ctrl+O
-:map <C-O> <C-W>
+" Remap a bunch of standardized items
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>e :e
+nnoremap <Leader>8 :set tw=80<CR>
+nnoremap <Leader>0 :set tw=0<CR>
+
+" Window navigation
+nnoremap <Leader>H <C-w>H
+nnoremap <Leader>J <C-w>J
+nnoremap <Leader>K <C-w>K
+nnoremap <Leader>L <C-w>L
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>k <C-w>k
+nnoremap <Leader>l <C-w>l
 
 " Numbers.vim
 nnoremap <F3> :NumbersToggle<CR>
@@ -28,13 +42,14 @@ endfunction
 
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
-let g:UltiSnipsExpandTrigger="<Leader><CR>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<Leader><cr>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Vimux -- Run rake
 nmap <F12> :call VimuxRunCommand("rake")<CR>
 " Go to tag in current file
-inoremap <Leader>t <Esc>:CtrlPBufTag<CR>
+inoremap <Leader><Leader>t <Esc>:CtrlPBufTag<CR>
 " Save/Quit
 map <C-s> :w<CR>
 map <C-q> :q<CR>

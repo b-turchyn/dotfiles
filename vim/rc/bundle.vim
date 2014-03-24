@@ -9,8 +9,6 @@ Bundle 'majutsushi/tagbar'
 
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-Bundle 'altercation/vim-colors-solarized'
 
 " UI Addons
 Bundle 'Lokaltog/powerline'
@@ -42,7 +40,6 @@ Bundle "Arduino-syntax-file"
 Bundle "chrisbra/color_highlight"
 Bundle "scrooloose/syntastic"
 Bundle "chrisbra/csv.vim"
-Bundle "tpope/vim-git"
 Bundle "tpope/vim-markdown"
 Bundle "kchmck/vim-coffee-script"
 
