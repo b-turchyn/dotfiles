@@ -23,6 +23,13 @@ nnoremap <Leader>l <C-w>l
 " Numbers.vim
 nnoremap <F3> :NumbersToggle<CR>
 
+" Rails Support
+map <Leader>rr :e config/routes.rb<CR>
+map <Leader>rb :e Gemfile<CR>
+nmap <Leader>rc :Rcontroller<CR>
+nmap <Leader>rv :Rview<CR>
+nmap <Leader>rm :Rmodel<CR>
+
 " Support for YCM + Ultisnips/Snipmate
 " Source: https://github.com/Valloric/YouCompleteMe/issues/36
 function! g:UltiSnips_Complete()
