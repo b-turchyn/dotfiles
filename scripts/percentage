@@ -1,0 +1,43 @@
+#!/bin/bash
+
+BAR_FULL="■"
+BAR_HALF_LTR="◤"
+BAR_HALF_RTL="◥"
+BAR_EMPTY=" "
+INCREMENT_FULL=10
+INCREMENT_HALF=5
+
+direction=$1
+min=$2
+max=$3
+value=$4
+
+output=""
+
+for (( i=$min; i<$max; i+=$INCREMENT_FULL ))
+do
+  this_token=""
+  next_value=`echo "$i + $INCREMENT_FULL" | bc`
+  next_half_value=`echo "$i + $INCREMENT_HALF" | bc`
+
+  # Determine what goes in this segment
+  if [[ $value -ge $next_value ]]; then
+    this_token="$BAR_FULL"
+  elif [[ $value -ge $next_half_value ]]; then
+    if [[ "$direction" == "l" ]]; then
+      this_token="$BAR_HALF_LTR"
+    elif [[ "$direction" == "r" ]]; then
+      this_token="$BAR_HALF_RTL"
+    fi
+  else
+    this_token="$BAR_EMPTY"
+  fi
+
+  if [[ "$direction" == "l" ]]; then
+    output="$output$this_token"
+  elif [[ "$direction" == "r" ]]; then
+    output="$this_token$output"
+  fi
+done
+
+echo "$output"

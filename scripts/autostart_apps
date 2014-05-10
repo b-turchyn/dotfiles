@@ -1,0 +1,16 @@
+#!/bin/bash
+if ! rulc -l > /dev/null ; then
+  (setsid ruld &)
+  while ! rulc -l > /dev/null ; do
+    sleep 0.1
+  done
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+FILES=`find $DIR/autostart -regex ".*/[0-9][0-9]\..*" -type f -perm -u+x | sort`
+
+for f in $FILES
+do
+  $f
+done

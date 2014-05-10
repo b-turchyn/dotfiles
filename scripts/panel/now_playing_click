@@ -1,0 +1,9 @@
+#!/bin/bash
+
+isopen=`ps -C ncmpcpp | wc -l`
+
+if [ $isopen -eq 1 ]; then
+  ~/scripts/autostart/00.ncmpcpp &
+fi
+
+bspc desktop -f media

@@ -16,5 +16,6 @@ if [ -z "$rules" ] ; then
   rulc -a 'class=="Screenkey"' 'manage=off'
   rulc -a 'title=="media_ncmpcpp"' 'desktop=media, floating=on'
   rulc -a 'title=="media_htop"' 'desktop=media, floating=on'
+  rulc -a 'title=="media_mpdviz"' 'desktop=media, floating=on'
   rulc -a 'title=="media_irc"' 'desktop=media, floating=on'
 fi

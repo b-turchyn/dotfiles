@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while : ; do
+  mpc idle
+  mpc current
+  album=`mpc current -f %album%`
+  artist=`mpc current -f %artist%`
+  art="~/.albumart/$artist/$album.jpg"
+  feh --cycle-once "$art"
+done

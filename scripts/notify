@@ -1,0 +1,33 @@
+#!/bin/sh
+
+FIFO=/tmp/notify.fifo
+
+test -p $FIFO || mkfifo $FIFO
+
+# Bar configs
+FONT="\"-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1\""
+BGCOLOR="#ff272822"
+FGCOLOR="#fff8f8f2"
+
+# Dimensions
+w=50
+h=50
+x=30
+y=30
+
+duration=3
+
+# Popup counter
+n=-1
+
+tail -f $FIFO | while IFS= read -r message; do
+  n=$((n + 1))
+  {
+    # Calculate height based on line count
+    width=$(txtw -f $FONT "${message}")
+    baropt="-F $FGCOLOR -B $BGCOLOR -g $((width + w))x${h}+${x}+$((y + (h+y) * n))"
+    n=$((n - 1))
+    (echo "${message}"; sleep ${duration}) | bar ${baropt}
+  } &
+done
+

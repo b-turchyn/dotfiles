@@ -1,22 +1,35 @@
 #! /bin/sh
-#
-# Example panel for LemonBoy's bar
+CB="#ff272822"
+C0="#ff000000"
+C1="#fff92672"
+C2="#ffa6e22e"
+C3="#ffe6db74"
+C4="#ff66d9ef"
+C5="#ffae81ff"
+C6="#ff00d9d9"
+C7="#fff5deb3"
+C8="#ff555555"
+C9="#ffdd4278"
 
-# Using the vars (left|right)_(left|centre|right) to control position
+BSPCf="bspc desktop -f "
 
 while read -r line ; do
     case $line in
         S*)
             # clock output
-            clock="\\f6\\f0\\u6\\b6 ${line#?}"
+            clock="%{F$C6}%{F$C0}%{U$C6}%{B$C6} %{A:~/.scripts/toggle_conky cal:}${line#?}%{A}"
             ;;
         T*)
             # xtitle output
-            title="\\br\\f7${line#?}"
+            title="%{B-}%{F$C7}${line#?}"
             ;;
         Z*)
             # Now Playing
-            now_playing="\\u6\\b6\\f0\\ab${line#?}\\ac~/scripts/panel/now_playing_click\\ae \\f6\\br\\ur"
+            now_playing="%{U$C6}%{B$C6}%{F$C0}%{A:~/.scripts/panel/now_playing_click:}${line#?}%{A}"
+            ;;
+        A*)
+            # Teamspeak Server
+            ts="%{F$C8}⮁%{F$C0} %{A:~/.scripts/toggle_conky ts:}${line#?}%{A} %{F$C6}%{B-}%{U-}"
             ;;
         L*)
             # System Load
@@ -24,18 +37,18 @@ while read -r line ; do
             ;;
         M*)
           # Memory Usage
-          memory="⭦${line#?} \\f8⮃\\f0"
+          memory="⭦${line#?} %{F$C8}⮃%{F$C0}"
           ;;
         N*)
           # Network IPs
-          network="${line#?} \\f8⮃\\f0"
+          network="${line#?} %{F$C8}⮃%{F$C0}"
           ;;
         C*)
           # CPU Usage
-          cpu="⭥${line#?} \\f8⮃\\f0"
+          cpu="⭥${line#?} %{F$C8}⮃%{F$C0}"
           ;;
         E*)
-            temperature="\\f4\\f0\\u4\\b4 ${line#?} \\f8⮃\\f0"
+            temperature="%{F$C4}%{F$C0}%{U$C4}%{B$C4} ${line#?} %{F$C8}⮃%{F$C0}"
           ;;
         W*)
             # bspwm internal state
@@ -51,32 +64,32 @@ while read -r line ; do
                 case $item in
                     O*)
                         # focused occupied desktop
-                        wm_infos=" \\u2\\br\\fr${name}\\ur"
+                        wm_infos=" %{B-F-U$C2+u}${name}%{-uU-}"
                         ;;
                     F*)
                         # focused free desktop
-                        wm_infos=" \\u2\\br\\f8${name}\\ur"
+                        wm_infos=" %{B-F$C8U$C2+u}${name}%{-uU-}"
                         ;;
                     U*)
                         # focused urgent desktop
-                        wm_infos=" \\u2\\b1\\fr${name}\\ur"
+                        wm_infos=" %{B$C1F-U$C2+u}${name}%{-uU-}"
                         ;;
                     o*)
                         # occupied desktop
-                        wm_infos=" \\br\\fr\\ab${name}"
+                        wm_infos=" %{B-}%{F-}%{A:${BSPCf}${name}:}${name}%{A}"
                         ;;
                     f*)
                         # free desktop
-                        wm_infos=" \\br\\f8${name}\\fr"
+                        wm_infos=" %{B-}%{F$C8}%{A:${BSPCf}${name}:}${name}%{A}%{F-}"
                         ;;
                     u*)
                         # urgent desktop
-                        wm_infos=" \\b1\\fr${name}"
+                        wm_infos=" %{B$C1}%{F-}${name}"
                         ;;
                     L*)
                         # layout
                         layout=$(printf "%s" "${name}" | sed 's/\(.\).*/\U\1/')
-                        wm_info_right="$wm_info_right  \\br\\f6$layout"
+                        wm_info_right="$wm_info_right  %{B-}%{F$C6}$layout"
                         ;;
                     *HDMI2*)
                         # Left monitor
@@ -91,7 +104,7 @@ while read -r line ; do
 
                 case $screen in
                   l)
-                    wm_info_left="$wm_info_left $wm_infos"
+                    wm_info_left="$wm_info_left$wm_infos"
                     ;;
                   r)
                     wm_info_right="$wm_info_right $wm_infos"
@@ -102,12 +115,15 @@ while read -r line ; do
     esac
 
     right_right="$temperature $network $cpu $memory $system_load $clock "
-    left_left=" $now_playing"
-    left_centre="\\f00\\f11\\f22\\f33\\f44\\f55\\f66\\f77\\f88\\f99\\fr"
-    left_right="$wm_info_left "
+    left_left="%{B$C6} $now_playing $ts"
+    left_centre="%{F$C0}0%{F$C1}1%{F$C2}2%{F$C3}3%{F$C4}4%{F$C5}5%{F$C6}6%{F$C7}7%{F$C8}8%{F$C9}9%{F-}"
+    left_right=" $wm_info_left "
 
     printf "%s\n" \
-      "\\l$wm_info_right $right_left\\c$title\\r$right_right\\sn\\l\\f2$left_left\\c$left_centre\\r$left_right\\ab \\aca\\ae"
+      "%{S0}$left_left%{r}$left_right%{S2}%{l}$wm_info_right $right_left%{c}$title%{r}$right_right%{U-F-B-}"
+
+    #printf "%s\n" \
+      #"\\l$wm_info_right $right_left\\c$title\\r$right_right\\sn\\l\\f2$left_left\\c$left_centre\\r$left_right\\ab \\aca\\ae"
       #"$wm_info_right $right_left " \
       #"$title " \
       #"$system_load $clock " \

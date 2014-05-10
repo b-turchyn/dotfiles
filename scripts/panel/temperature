@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while true ; do
+  echo "E `cat /sys/bus/acpi/devices/LNXTHERM:00/thermal_zone/temp | awk '{$0 = $0 / 1000;print $0 "°C"}'`"
+  sleep 5
+done

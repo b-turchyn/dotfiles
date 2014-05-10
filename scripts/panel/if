@@ -1,0 +1,19 @@
+#!/bin/sh
+
+################################################################################
+# bar script                                                                   #
+# Network interface display                                                    #
+#                                                                              #
+# Displays either the current internal/external IP address or the loopback     #
+# IP. Currently will always try to reach out for an external IP (needs to      #
+# change). Cannot handle more than one internal IP.                            #
+#                                                                              #
+# Refresh rate: 1 minute                                                       #
+################################################################################
+
+while true ; do
+  internal=`ifconfig | grep "inet addr" | awk 'BEGIN{loopback="";actual=""}{c=split($0,a,"(\\\\:|\\\\s)+");if(match(a[4],"^127.")){loopback=a[4]}else{actual=a[4]}}END{if(actual==""){print loopback}else{print actual}}'`
+  external=`curl -s icanhazip.com`
+  echo "N L $internal ⮃ W $external"
+  sleep 60
+done

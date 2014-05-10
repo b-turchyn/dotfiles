@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while true ; do
+  val=`cat /proc/meminfo | grep -E "^(Cached|Buffers|MemFree|MemTotal):" | awk 'BEGIN{total=0;used=0;}{a=split($0,b,"\\\\s+");if(b[1]=="MemTotal:"){total=b[2];used+=b[2]}else if(b[1]=="MemFree:"){used-=b[2]}else if(b[1]=="Cached:"){used-=b[2]}else if(b[1]=="Buffers:"){used-=b[2]}}END{printf("%04.1f%%\n", (used / total) * 100)}'`
+  echo "M `~/scripts/percentage r 0 100 ${val/.*}` $val"
+  sleep 5
+done

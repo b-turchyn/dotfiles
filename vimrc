@@ -33,6 +33,12 @@ try
 catch
 endtry
 
+" File Types
+try
+  source ~/.vim/rc/filetypes.vim
+catch
+endtry
+
 " Backup and Swap spaces
 set backupdir=$HOME/.vim/backup//
 set directory=$HOME/.vim/swap//

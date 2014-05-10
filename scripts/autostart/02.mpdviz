@@ -1,0 +1,3 @@
+#!/bin/sh
+
+urxvt --geometry 90x8+30+500 -title media_mpdviz -e ~/.gocode/bin/mpdviz -i -v spectrum -d --imode="256" &

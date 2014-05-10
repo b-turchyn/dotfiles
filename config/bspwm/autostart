@@ -7,9 +7,9 @@ start-pulseaudio-x11 &
 wmname BSPWM
 urxvtd &
 synergys &
-~/scripts/autostart_apps &
+~/.scripts/autostart_apps &
 # compton --config ~/.compton.conf --paint-on-overlay &
 cairo-compmgr &
 
 # Background image
-hsetroot -fill "/home/lightstalker/Pictures/wallpaper.jpg" &
+hsetroot -fill "/home/lightstalker/Pictures/wallpaper.png" &

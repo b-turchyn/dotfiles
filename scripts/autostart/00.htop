@@ -1,0 +1,3 @@
+#!/bin/sh
+
+urxvt --geometry 90x8+1260+30 -title media_htop -e htop &

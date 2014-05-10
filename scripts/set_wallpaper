@@ -1,0 +1,10 @@
+#!/bin/sh
+
+TEMPFILE="$HOME/.tmp/output.png"
+file="$1"
+
+convert -resize 1920x1080\< "$file" $TEMPFILE
+montage $TEMPFILE $TEMPFILE -geometry 1920x1080\< ~/Pictures/wallpaper.png
+rm $TEMPFILE
+
+hsetroot -fill ~/Pictures/wallpaper.png

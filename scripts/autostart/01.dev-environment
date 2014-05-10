@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Exec command
+urxvt --geometry 130x30+960+555 -title media_irc -e ssh brian@dev-environment &

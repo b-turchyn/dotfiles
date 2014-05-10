@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Exec command
+urxvt --geometry 90x24+30+650 -title media_ncmpcpp -e ncmpcpp &

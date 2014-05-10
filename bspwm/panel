@@ -19,16 +19,18 @@ bspc config top_padding $PANEL_HEIGHT
 bspc control --subscribe > "$PANEL_FIFO" &
 xtitle -sf 'T%s' > "$PANEL_FIFO" &
 clock -sf 'S%a, %B %d @ %H:%M' > "$PANEL_FIFO" &
-~/scripts/panel/now_playing > "$PANEL_FIFO" &
-~/scripts/panel/load > "$PANEL_FIFO" &
-~/scripts/panel/temperature > "$PANEL_FIFO" &
-~/scripts/panel/cpu > "$PANEL_FIFO" &
-~/scripts/panel/memory > "$PANEL_FIFO" &
-~/scripts/panel/if > "$PANEL_FIFO" &
+~/.scripts/panel/now_playing > "$PANEL_FIFO" &
+~/.scripts/panel/load > "$PANEL_FIFO" &
+~/.scripts/panel/temperature > "$PANEL_FIFO" &
+~/.scripts/panel/cpu > "$PANEL_FIFO" &
+~/.scripts/panel/memory > "$PANEL_FIFO" &
+~/.scripts/panel/if > "$PANEL_FIFO" &
+GEM_PATH=/home/lightstalker/.rvm/gems/ruby-2.1.1 ~/.rvm/rubies/ruby-2.1.1/bin/ruby ~/.scripts/panel/ts_monitor >> ~/ts_monitor.log &
 
 case "$flavor" in
     bar)
-        cat "$PANEL_FIFO" | panel_bar | bar &
+        cat "$PANEL_FIFO" | panel_bar | bar -u 2 -f "-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1","fixed" -B "#ff272822" -F "#fff8f8f2" | bash &
+        #cat "$PANEL_FIFO"
         ;;
     dzen2)
         . panel_colors

@@ -33,9 +33,9 @@ nmap <Leader>rm :Rmodel<CR>
 " Support for YCM + Ultisnips/Snipmate
 " Source: https://github.com/Valloric/YouCompleteMe/issues/36
 function! g:UltiSnips_Complete()
-  call UltiSnips_JumpForwards()
+  call UltiSnips#JumpForwards()
   if g:ulti_jump_forwards_res == 0
-    call UltiSnips_ExpandSnippet()
+    call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
       if pumvisible()
         return "\<C-n>"

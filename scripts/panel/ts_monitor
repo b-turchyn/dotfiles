@@ -1,0 +1,123 @@
+#!/usr/bin/env ruby
+
+require 'teamspeak-ruby'
+require 'yaml'
+require 'fifo'
+
+CONFIG="#{Dir.home}/.config/ts_monitor.yaml"
+CONKY_FILE="#{Dir.home}/.scripts/panel/conky/conky_ts"
+CONKY_FILE_TEMPLATE="#{CONKY_FILE}_template"
+
+@ts = nil
+@config = {}
+@clients = []
+@old_clients = []
+@first_load = true
+
+def connect
+  if @ts == nil
+    @ts = Teamspeak.new(@config[:host][:server])
+    @ts.login(@config[:host][:user], @config[:host][:password])
+    @ts.command('use', {sid: @config[:host][:server_id]})
+  end
+end
+
+def disconnect
+  puts 'Disconnecting...'
+  @ts.disconnect
+end
+
+def get_config
+  @config = YAML.load_file(CONFIG)
+end
+
+def get_client_list
+  @old_clients = @clients
+  @clients = @ts.command('clientlist')
+  @clients.delete_if {|client| client['client_type'] != '0'} if @clients
+end
+
+def pause
+  sleep @config[:app][:sleep_duration]
+end
+
+def loop_logic
+  begin
+    connect
+    get_fifo
+    get_client_list
+    write_out display_status
+    generate_notifications
+    pause
+  end while true
+end
+
+def get_fifo
+  @pipe = Fifo.new('/tmp/panel-fifo', :w, :nowait)
+end
+
+def display_status
+  @config[:display][:status].gsub('#', @clients.length.to_s)
+end
+
+def generate_notifications
+  if @first_load
+    write_conky
+    @first_load = false
+  else
+    if users_changed
+      write_conky
+      send_online_notifications
+      send_offline_notifications
+    end
+  end
+end
+
+def send_online_notifications
+  (@clients - @old_clients).each { |client|
+    cmd = @config[:display][:notify_cmd].gsub('#',
+              @config[:display][:notify_online].gsub('#', client['client_nickname']))
+    system(cmd)
+  }
+end
+
+def send_offline_notifications
+  (@old_clients - @clients).each { |client|
+    cmd = @config[:display][:notify_cmd].gsub('#',
+              @config[:display][:notify_offline].gsub('#', client['client_nickname']))
+    system(cmd)
+  }
+end
+
+def users_changed
+  @old_clients.length != @clients.length || (@old_clients & @clients).length != @clients.length
+end
+
+def write_out val
+  @pipe.puts val
+end
+
+def write_conky
+  contents = ""
+  File.open(CONKY_FILE_TEMPLATE) { |f| contents = f.read }
+  if @clients.length > 0
+    contents.gsub!('#####', "#{@clients.length} users online:\n\n #{@clients.map {|client| "- #{client['client_nickname']}"}.join("\n${goto 15}")}")
+  else
+    contents.gsub!('#####', 'No users online')
+  end
+  File.open(CONKY_FILE, 'w') { |f| f.write contents }
+end
+
+get_config
+
+begin
+  loop_logic
+rescue SystemExit, Interrupt
+  #Nothing
+rescue Exception => e
+  puts e.message
+  puts e.backtrace.inspect
+ensure
+  disconnect
+end
+
