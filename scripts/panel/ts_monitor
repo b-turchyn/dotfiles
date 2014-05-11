@@ -5,8 +5,7 @@ require 'yaml'
 require 'fifo'
 
 CONFIG="#{Dir.home}/.config/ts_monitor.yaml"
-CONKY_FILE="#{Dir.home}/.scripts/panel/conky/conky_ts"
-CONKY_FILE_TEMPLATE="#{CONKY_FILE}_template"
+CONKY_FILE="#{Dir.home}/.tmp/ts_online.txt"
 
 @ts = nil
 @config = {}
@@ -99,11 +98,10 @@ end
 
 def write_conky
   contents = ""
-  File.open(CONKY_FILE_TEMPLATE) { |f| contents = f.read }
   if @clients.length > 0
-    contents.gsub!('#####', "#{@clients.length} users online:\n\n #{@clients.map {|client| "- #{client['client_nickname']}"}.join("\n${goto 15}")}")
+    contents = "#{@clients.length} users online:\n\n #{@clients.map {|client| "- #{client['client_nickname']}"}.join("\n")}"
   else
-    contents.gsub!('#####', 'No users online')
+    contents = 'No users online'
   end
   File.open(CONKY_FILE, 'w') { |f| f.write contents }
 end
