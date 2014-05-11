@@ -17,8 +17,9 @@ gap_y 27
 own_window_colour 272822
 default_color F8F8F2
 
-use_xft yes
-xftfont Tewi:size=7
+use_xft no
+font -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
+
 draw_shades yes
 
 update_interval 5
