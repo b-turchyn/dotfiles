@@ -99,7 +99,7 @@ end
 def write_conky
   contents = ""
   if @clients.length > 0
-    contents = "#{@clients.length} users online:\n\n #{@clients.map {|client| "- #{client['client_nickname']}"}.join("\n")}"
+    contents = "#{@clients.length} users online:\n\n#{@clients.map {|client| " - #{client['client_nickname']}"}.sort.join("\n")}"
   else
     contents = 'No users online'
   end
