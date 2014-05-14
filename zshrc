@@ -15,6 +15,7 @@ DEFAULT_USER="lightstalker"
 alias :wq="sl -a && exit"
 alias :w="sl -a && exit"
 alias gls="git status"
+alias tf="tail -f"
 
 CASE_SENSITIVE="true"
 
