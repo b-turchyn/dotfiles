@@ -1,10 +1,17 @@
-#! /bin/sh
+#! /bin/bash
 
 if [ $(pgrep -cx panel) -gt 1 ] ; then
     printf "%s\n" "The panel is already running." >&2
     exit 1
 fi
 
+function traphup {
+  $0 "$@" &
+  exit 0
+}
+
+
+trap traphup HUP;
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 flavor=${1:-bar}
@@ -24,7 +31,7 @@ clock -sf 'S%a, %B %d @ %H:%M' > "$PANEL_FIFO" &
 ~/.scripts/panel/temperature > "$PANEL_FIFO" &
 ~/.scripts/panel/cpu > "$PANEL_FIFO" &
 ~/.scripts/panel/memory > "$PANEL_FIFO" &
-~/.scripts/panel/if > "$PANEL_FIFO" &
+~/.scripts/panel/ifaces > "$PANEL_FIFO" &
 GEM_PATH=/home/lightstalker/.rvm/gems/ruby-2.1.1 ~/.rvm/rubies/ruby-2.1.1/bin/ruby ~/.scripts/uptime_robot &
 GEM_PATH=/home/lightstalker/.rvm/gems/ruby-2.1.1 ~/.rvm/rubies/ruby-2.1.1/bin/ruby ~/.scripts/panel/ts_monitor >> ~/ts_monitor.log &
 
