@@ -1,0 +1,3 @@
+#!/bin/sh
+
+conky -c ~/.scripts/panel/conky/uptime_robot > ~/conky.log 2>&1
