@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+
+require 'rest_client'
+require 'yaml'
+require 'json'
+
+CONFIG="#{Dir.home}/.config/uptime_robot.yaml"
+CONKY_FILE="#{Dir.home}/.tmp/uptime_robot"
+
+class UptimeMonitor
+  include Comparable
+
+  attr_accessor :name, :status, :id, :ratio
+  COLORS = {
+    '0' => 'yellow',  # Paused
+    '1' => 'orange',  # Not yet checked
+    '2' => 'green',   # Up
+    '8' => 'red',     # Seems down
+    '9' => 'red'      # Down
+  }
+  STATUSCODES = {
+    '0' => 'Paused',  # Paused
+    '1' => 'Not Yet Checked',  # Not yet checked
+    '2' => 'Up',   # Up
+    '8' => 'Seems Down',     # Seems down
+    '9' => 'Down'      # Down
+  }
+
+  def initialize input
+    @name = input['friendlyname']
+    @status = input['status']
+    @id = input['id']
+    @ratio = input['alltimeuptimeratio']
+  end
+
+  def to_s
+    sprintf('%s${alignr}${color %s}%s${color0}', @name, COLORS[@status], STATUSCODES[@status])
+  end
+
+  def <=> other
+    @name <=> other.name
+  end
+end
+
+def get_config
+  @config = YAML.load_file(CONFIG)
+end
+
+
+def loop_logic
+  begin
+    @monitors = []
+    call_api
+    write_out build_text
+    pause
+  end while true
+end
+
+def build_text
+  @monitors.sort.map { |mon|
+    mon.to_s
+  }.join("\n")
+end
+
+def write_out contents
+  File.open(CONKY_FILE, 'w') { |f| f.write contents }
+end
+
+def pause
+  sleep @config[:app][:sleep_duration]
+end
+
+def call_api
+  result = JSON.parse(RestClient.get(build_uri))
+  result['monitors']['monitor'].each {|input|
+    @monitors.push UptimeMonitor.new(input)
+  }
+end
+
+def build_uri
+  @config[:api][:uri].gsub('%s', @config[:api][:key])
+end
+
+def destroy_output
+  write_out "${alignc}${color red}Monitor Offline"
+end
+
+get_config
+
+begin
+  loop_logic
+rescue SystemExit, Interrupt
+  #Nothing
+rescue Exception => e
+  puts e.message
+  puts e.backtrace.inspect
+ensure
+  destroy_output
+end
