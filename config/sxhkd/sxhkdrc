@@ -127,7 +127,7 @@ alt + shift + b
 
 # Media Controls
 XF86AudioMute
-  /home/lightstalker/scripts/dvol2 -t
+  /home/lightstalker/.scripts/dvol2 -t
 
 super + F5
   ncmpcpp toggle
@@ -161,6 +161,12 @@ super + ctrl + Page_Down
 
 Print
   scrot -q 100
+
+# Panel hotkeys
+alt + F1
+  /home/lightstalker/.scripts/toggle_conky ts
+alt + F2
+  /home/lightstalker/.scripts/toggle_conky cal
 
 # make sxhkd reload its configuration files:
 super + Escape
