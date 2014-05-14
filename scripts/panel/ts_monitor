@@ -3,6 +3,7 @@
 require 'teamspeak-ruby'
 require 'yaml'
 require 'fifo'
+require 'json'
 
 CONFIG="#{Dir.home}/.config/ts_monitor.yaml"
 CONKY_FILE="#{Dir.home}/.tmp/ts_online.txt"
@@ -33,7 +34,7 @@ end
 def get_client_list
   @old_clients = @clients
   @clients = @ts.command('clientlist')
-  @clients.delete_if {|client| client['client_type'] != '0'} if @clients
+  @clients.delete_if {|client| client['client_type'] != '0'}.map {|client| client.delete('cid')} if @clients
 end
 
 def pause
