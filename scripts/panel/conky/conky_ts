@@ -24,4 +24,4 @@ font -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
 update_interval 5
 
 TEXT
-${exec cat ~/.tmp/ts_online.txt}
+${execp cat ~/.tmp/ts_online.txt}

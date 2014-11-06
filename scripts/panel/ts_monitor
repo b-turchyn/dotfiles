@@ -11,6 +11,7 @@ CONKY_FILE="#{Dir.home}/.tmp/ts_online.txt"
 @ts = nil
 @config = {}
 @clients = []
+@servers = []
 @old_clients = []
 @first_load = true
 
@@ -33,8 +34,9 @@ end
 
 def get_client_list
   @old_clients = @clients
+  @channels = @ts.command('channellist')
   @clients = @ts.command('clientlist')
-  @clients.delete_if {|client| client['client_type'] != '0'}.map {|client| client.delete('cid')} if @clients
+  @clients.delete_if {|client| client['client_type'] != '0'} if @clients
 end
 
 def pause
@@ -62,15 +64,51 @@ end
 
 def generate_notifications
   if @first_load
+    tie_users_to_channels
     write_conky
     @first_load = false
   else
     if users_changed
+      tie_users_to_channels
       write_conky
       send_online_notifications
       send_offline_notifications
     end
   end
+end
+
+def tie_users_to_channels
+  @clients.sort_by { |key| key['client_nickname'] }.each do |client|
+    channel = @channels.select { |key| key['cid'] == client['cid'] }[0]
+    (channel['users'] ||= []) << client
+  end
+end
+
+def build_channel_list
+  result = ''
+  last_cid = []
+  depth = 0
+  @channels.each do |c|
+    if c['pid'] == '0'
+      last_cid.clear
+      depth = 0
+    elsif last_cid[-1] == c['pid']
+      # Do nothing
+    elsif last_cid.index(c['pid']) != nil
+      while !last_cid.empty? && last_cid.index(c['pid']) != nil
+        depth -= 1
+        last_cid.pop
+      end
+    else
+      last_cid << c['pid']
+      depth += 1
+    end
+    if c['users'] && !c['users'].empty?
+      result += "#{' ' * 2 * depth} = #{c['channel_name']}\n"
+      result += c['users'].map{ |user| "#{' ' * 2 * depth}  - #{user['client_nickname']}" }.sort.join("\n")
+    end
+  end
+  result
 end
 
 def send_online_notifications
@@ -100,7 +138,7 @@ end
 def write_conky
   contents = ""
   if @clients.length > 0
-    contents = "#{@clients.length} users online:\n\n#{@clients.map {|client| " - #{client['client_nickname']}"}.sort.join("\n")}"
+    contents = "#{@clients.length} users online:\n\n#{build_channel_list}"
   else
     contents = 'No users online'
   end
