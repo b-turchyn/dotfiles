@@ -2,6 +2,7 @@
 nmap <F8> :TagbarToggle<CR>
 " Leader tag
 let mapleader = ","
+let g:rspec_command = "Dispatch rspec {spec}"
 
 " Remap a bunch of standardized items
 nnoremap <Leader>q :q<CR>
@@ -26,9 +27,39 @@ nnoremap <F3> :NumbersToggle<CR>
 " Rails Support
 map <Leader>rr :e config/routes.rb<CR>
 map <Leader>rb :e Gemfile<CR>
+nmap <Leader>sc :Scontroller<CR>
+nmap <Leader>sv :Sview<CR>
+nmap <Leader>sm :Smodel<CR>
+nmap <Leader>sj :Sjavascript<CR>
+nmap <Leader>ss :Sstylesheet<CR>
+nmap <Leader>vc :Vcontroller<CR>
+nmap <Leader>vv :Vview<CR>
+nmap <Leader>vm :Vmodel<CR>
+nmap <Leader>vj :Vjavascript<CR>
+nmap <Leader>vs :Vstylesheet<CR>
 nmap <Leader>rc :Rcontroller<CR>
 nmap <Leader>rv :Rview<CR>
 nmap <Leader>rm :Rmodel<CR>
+nmap <Leader>rj :Rjavascript<CR>
+nmap <Leader>rs :Rstylesheet<CR>
+nmap <Leader>en :e config/locales/en.yml<CR>
+
+" Tabs
+map <Leader>tn :tabnext<CR>
+map <Leader>tp :tabprev<CR>
+map <Leader>tc :tabnew<CR>
+map <Leader>tf :tabfirst<CR>
+map <Leader>tl :tablast<CR>
+
+" CtrlP.Vim - Make default Mixed Mode
+nmap <c-P> :CtrlPBufTag<CR>
+
+" Encouragement to add more leader commands
+map <Leader>hk :tabnew<CR>:e ~/.vim/rc/hotkeys.vim<CR>
+
+" RSpec.vim integration
+map <Leader>ts :call RunCurrentSpecFile()<CR>
+
 
 " Support for YCM + Ultisnips/Snipmate
 " Source: https://github.com/Valloric/YouCompleteMe/issues/36
@@ -57,6 +88,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 nmap <F12> :call VimuxRunCommand("rake")<CR>
 " Go to tag in current file
 inoremap <Leader><Leader>t <Esc>:CtrlPBufTag<CR>
+noremap <Leader><Leader>t <Esc>:CtrlPBufTag<CR>
 " Save/Quit
 map <C-s> :w<CR>
 map <C-q> :q<CR>

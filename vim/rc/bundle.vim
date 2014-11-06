@@ -15,12 +15,16 @@ Bundle 'Lokaltog/powerline'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'Valloric/YouCompleteMe'
 
+" Rails development
+Bundle 'thoughtbot/vim-rspec'
+Bundle "tpope/vim-rails"
+Bundle 'tpope/vim-dispatch'
+
 " VCS Integration
 Bundle 'tpope/vim-fugitive'
 Bundle 'mattn/gist-vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'vcscommand.vim'
-Bundle 'gundo.vim'
 Bundle 'tpope/vim-git'
 
 " Color Schemes
@@ -33,15 +37,16 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Align'
 Bundle 'keepcase.vim'
+Bundle 'eapache/rainbow_parentheses.vim'
 
 " Syntax
-Bundle "tpope/vim-rails"
 Bundle "Arduino-syntax-file"
 Bundle "chrisbra/color_highlight"
 Bundle "scrooloose/syntastic"
 Bundle "chrisbra/csv.vim"
 Bundle "tpope/vim-markdown"
 Bundle "kchmck/vim-coffee-script"
+Bundle "groenewege/vim-less"
 
 " Snippets
 Bundle 'SirVer/ultisnips'
@@ -55,7 +60,6 @@ Bundle "benmills/vimux"
 Bundle "dahu/LearnVim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-shell"
-Bundle "connermcd/VimRepress"
 Bundle "EnhCommentify.vim"
 Bundle "scrooloose/nerdtree"
-Bundle "kien/ctrlp.vim"
+Bundle "ctrlpvim/ctrlp.vim"
