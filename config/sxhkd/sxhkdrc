@@ -2,28 +2,35 @@
 # bspwm hotkeys
 #
 
+# Exit WM
 super + alt + Escape
     killall panel; \
     bspc quit
 
+# Kill a window
 super + w
     bspc window -c
 
+# Toggle the current window to take up the full desktop (not fullscreen) on this desktop
 super + t
     bspc desktop -l next
 
 super + b
     bspc desktop -B
 
+# Toggle floating/fullscreen for the current window
 super + {s,f}
     bspc window -t {floating,fullscreen}
 
+# Toggle between the last accessed window/desktop
 super + {grave,Tab}
     bspc {window,desktop} -f last
 
+# Swap the current window with the last accessed window
 super + apostrophe
     bspc window -s last
 
+# Window access has history; move back/forward in history
 super + {u,d}
     bspc control --record-history off; \
     bspc window {older,newer} -f; \
@@ -32,21 +39,27 @@ super + {u,d}
 super + y
     bspc window -w last.manual
 
+# Move the current window to the biggest pane on this desktop
 super + m
     bspc window -s biggest
 
+# Select (or move the current pane to) the pane in a direction
 super + {_,shift + }{h,j,k,l}
     bspc window -{f,s} {left,down,up,right}
 
+# Rotate between the panes on the current desktop linearly
 super + {_,shift + }c
     bspc window -f {next,prev}
 
+# Move the current pane linearly through the current desktop
 super + {comma,period}
     bspc desktop -C {backward,forward}
 
+# Move linearly between desktops on this monitor
 super + bracket{left,right}
     bspc desktop -f {prev,next}
 
+# Select where to position the next pane relative to the current pane
 super + ctrl + {h,j,k,l}
     bspc window -p {left,down,up,right}
 
