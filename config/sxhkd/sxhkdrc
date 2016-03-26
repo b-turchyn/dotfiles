@@ -60,8 +60,11 @@ super + bracket{left,right}
     bspc desktop -f {prev,next}
 
 # Select where to position the next pane relative to the current pane
-super + ctrl + {h,j,k,l}
-    bspc window -p {left,down,up,right}
+super + ctrl + {Return,h,j,k,l}
+    bspc window -p {cancel,left,down,up,right}
+
+super + shift + {Return,h,j,k,l}
+    bspc window -w {last,left,down,up,right}.manual -p cancel
 
 super + ctrl + {_,shift + }space
     bspc {window -p cancel,desktop -c}
@@ -127,16 +130,13 @@ super + alt + BackSpace
 super + Return
     urxvt
 
-# Determine the position of the next created window
-super + alt + Return ; {h,l,k,j}
-    bspc window --presel {left,right,up,down}
-
 super + space
-    dmenu_run
+    /home/lightstalker/dwm/lighthouse/lighthouse | sh
+#    dmenu_run
 
 # Easy Application Starting
 alt + shift + b
-  chromium-browser
+  firefox
 
 # Media Controls
 XF86AudioMute
