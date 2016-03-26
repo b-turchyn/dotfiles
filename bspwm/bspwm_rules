@@ -14,8 +14,9 @@ if [ -z "$rules" ] ; then
   rulc -a 'instance=="mpv"' 'floating=on'
   rulc -a 'class=="Kupfer.py"' 'focus=on'
   rulc -a 'class=="Screenkey"' 'manage=off'
-  rulc -a 'title=="media_ncmpcpp"' 'desktop=media, floating=on'
-  rulc -a 'title=="media_htop"' 'desktop=media, floating=on'
-  rulc -a 'title=="media_mpdviz"' 'desktop=media, floating=on'
-  rulc -a 'title=="media_irc"' 'desktop=media, floating=on'
+  rulc -a 'title=="media_ncmpcpp"' 'desktop=media'
+  rulc -a 'title=="media_htop"' 'desktop=media'
+  rulc -a 'title=="media_mpdviz"' 'desktop=media'
+  rulc -a 'title=="media_irc"' 'desktop=media'
+  rulc -a 'class=="VLC"' 'desktop=media'
 fi
