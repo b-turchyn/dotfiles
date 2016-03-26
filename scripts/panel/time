@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while true ; do
+  date +"S%%{F#ffae81ff}%a %b %d %%{F#ff66d9ef}%H:%M:%S%%{F-}"
+  sleep 0.5
+done

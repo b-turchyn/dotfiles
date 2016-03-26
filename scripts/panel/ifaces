@@ -14,6 +14,6 @@
 while true ; do
   internal=`ifconfig | grep "inet addr" | awk 'BEGIN{loopback="";actual=""}{c=split($0,a,"(\\\\:|\\\\s)+");if(match(a[4],"^127.")){loopback=a[4]}else{actual=a[4]}}END{if(actual==""){print loopback}else{print actual}}'`
   external=`curl -s icanhazip.com`
-  echo "N L $internal ⮃ W $external"
+  echo "N$internal / $external"
   sleep 60
 done

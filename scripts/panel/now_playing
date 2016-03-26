@@ -1,6 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
 while true ; do
-  echo "Z⭯  $(mpc status | head -n 2 | tail -n 1 | cut -f1 -d " ") $(ncmpcpp --now-playing)"
+  STATUS=$(mpc status | head -n 2 | tail -n 1 | cut -f1 -d " ")
+  ICON=""
+  if [ "$STATUS" == "[playing]" ]; then
+    ICON="▶"
+  elif [ "$STATUS" == "[paused]" ]; then
+    ICON="□"
+  elif [ "$STATUS" == "[stopped]" ]; then
+    ICON="■"
+  fi
+  echo "Z$ICON $(ncmpcpp --now-playing)"
   mpc idle player > /dev/null
 done
