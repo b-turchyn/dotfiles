@@ -1,5 +1,8 @@
+! To reload: 'xrdb -merge ~/.Xresources'
 URxvt.perl-lib: /home/lightstalker/dwm/urxvt-perls
-URxvt.font: xft:Meslo LG S for Powerline:pixelsize=12:antialias=true:hinting=true
+! URxvt.font: xft:Meslo LG S for Powerline:pixelsize=12:antialias=true:hinting=true
+! URxvt.font: xft:PragmataPro\ for\ Powerline:pixelsize=12:antialias=true:hinting=true
+URxvt.font: xft:PragmataPro:pixelsize=12:antialias=true:hinting=true
 URxvt*.depth: 32
 URxvt.geometry: 90x30
 ! URxvt*.transparent: true
@@ -12,6 +15,7 @@ URxvt.saveLines: 50
 URxvt.internalBorder: 3
 URxvt.lineSpace: 0
 URxvt.letterSpace: -1
+URxvt.scrollBar: false
 
 ! Keyboard select
 URxvt.perl-ext-common: ...,keyboard-select
@@ -32,6 +36,23 @@ URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt*:background: [50]#272822
 *background:#272822
 *foreground:#F8F8F2
+
+! URxvt*color0: #1f1b2a
+! URxvt*color1: #0c0b13
+! URxvt*color2: #8b8a8f
+! URxvt*color3: #604b4a
+! URxvt*color4: #babdc2
+! URxvt*color5: #40353b
+! URxvt*color6: #b6958c
+! URxvt*color7: #a38376
+! URxvt*color8: #836e75
+! URxvt*color9: #a3a3a5
+! URxvt*color10: #88584a
+! URxvt*color11: #52281c
+! URxvt*color12: #dabfae
+! URxvt*color13: #96775b
+! URxvt*color14: #a75273
+! URxvt*color15: #9f4f36
 
 *color0:    #000000
 *color1:    #F92672
