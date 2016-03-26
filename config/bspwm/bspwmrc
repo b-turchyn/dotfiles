@@ -6,18 +6,23 @@ REMAINING_DESKS_MAIN="dev-editor III IV V VI VII VIII IX X"
 FIRST_DESK_SECONDARY=media
 REMAINING_DESKS_SECONDARY="dev-test iii iv v vi vii viii ix x"
 
+export PANEL_HEIGHT=14
+bspc config top_padding 15
+
+bspc config window_gap          0
+bspc config -m focused top_padding 15
+
 bspc desktop ^1 -n $FIRST_DESK_SECONDARY
 bspc monitor -a $REMAINING_DESKS_SECONDARY
-bspc config top_padding 14
+bspc config -m focused top_padding 15
 
 bspc monitor -f next
 
 bspc desktop Desktop2 -n $FIRST_DESK_MAIN
 bspc monitor -a $REMAINING_DESKS_MAIN
-bspc config top_padding 14
+bspc config -m focused top_padding 15
 
 bspc config border_width        2
-bspc config window_gap          12
 bspc config split_ratio         0.5
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
@@ -25,7 +30,7 @@ bspc config gapless_monocle     true
 bspc config external_rules_command "$(which external_rules)"
 bspwm_rules &
 # Media desktop is floating
-bspc desktop media --toggle floating=on
+# bspc desktop media --toggle floating=on
 
 xset +fp ~/.fonts
 xset +fp /usr/share/fonts/myfonts/ohsnap-1.8.0
@@ -33,5 +38,6 @@ xset +fp /usr/share/fonts/myfonts/tewi
 xset fp rehash
 fc-cache
 
+export PANEL_FIFO=/tmp/panel-fifo
 /home/lightstalker/.bspwm/panel &
 
