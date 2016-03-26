@@ -1,15 +1,17 @@
 #! /bin/sh
 
-echo "bspwm autostart" >> /home/lightstalker/startup.log
-
 xrdb ~/.Xresources
+gpg-agent --daemon &
 start-pulseaudio-x11 &
 wmname BSPWM
 urxvtd &
-synergys &
+synergys --enable-crypto &
 ~/.scripts/autostart_apps &
 # compton --config ~/.compton.conf --paint-on-overlay &
-cairo-compmgr &
+# cairo-compmgr &
 
 # Background image
 hsetroot -fill "/home/lightstalker/Pictures/wallpaper.png" &
+
+xrandr --output HDMI2 --auto --primary --rotate inverted --above HDMI3
+xrandr --output HDMI3 --auto --below HDMI2
