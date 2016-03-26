@@ -10,14 +10,18 @@ C6="#ff00d9d9"
 C7="#fff5deb3"
 C8="#ff555555"
 C9="#ffdd4278"
+C10="#ffa6e22e" # Green
+C11="#ff666666" # Grey 1
+C12="#ff66d9ef" # Cyan
 
 BSPCf="bspc desktop -f "
+
 
 while read -r line ; do
     case $line in
         S*)
             # clock output
-            clock="%{F$C6}%{F$C0}%{U$C6}%{B$C6} %{A:~/.scripts/toggle_conky cal:}${line#?}%{A}"
+            clock=" %{A:~/.scripts/toggle_conky cal:}${line#?}%{A}"
             ;;
         T*)
             # xtitle output
@@ -25,7 +29,7 @@ while read -r line ; do
             ;;
         Z*)
             # Now Playing
-            now_playing="%{U$C6}%{B$C6}%{F$C0}%{A:~/.scripts/panel/now_playing_click:}${line#?}%{A}"
+            now_playing="%{B-F-}%{A:~/.scripts/panel/now_playing_click:}${line#?}%{A}"
             ;;
         A*)
             # Teamspeak Server
@@ -33,22 +37,19 @@ while read -r line ; do
             ;;
         L*)
             # System Load
-            system_load="${line#?}"
+            system_load="%{F$C11}LOAD %{F-}${line#?}%{F-}"
             ;;
         M*)
           # Memory Usage
-          memory="⭦${line#?} %{F$C8}⮃%{F$C0}"
+          memory="%{F$C11}MEM %{F$C9}${line#?}%{F-} "
           ;;
         N*)
           # Network IPs
-          network="${line#?} %{F$C8}⮃%{F$C0}"
+          network="%{F$C11}NET %{F$C12}${line#?}%{F-}"
           ;;
         C*)
           # CPU Usage
-          cpu="⭥${line#?} %{F$C8}⮃%{F$C0}"
-          ;;
-        E*)
-            temperature="%{F$C4}%{F$C0}%{U$C4}%{B$C4} ${line#?} %{F$C8}⮃%{F$C0}"
+          cpu=" %{F$C11}CPU %{F$C10}${line#?}%{F-} "
           ;;
         W*)
             # bspwm internal state
@@ -115,7 +116,7 @@ while read -r line ; do
     esac
 
     right_right="$temperature $network $cpu $memory $system_load $clock "
-    left_left="%{B$C6} $now_playing $ts"
+    left_left=" $now_playing $ts"
     left_centre="%{F$C0}0%{F$C1}1%{F$C2}2%{F$C3}3%{F$C4}4%{F$C5}5%{F$C6}6%{F$C7}7%{F$C8}8%{F$C9}9%{F-}"
     left_right=" $wm_info_left "
 
