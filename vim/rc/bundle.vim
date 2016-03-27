@@ -12,7 +12,6 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " UI Addons
 Bundle 'Lokaltog/powerline'
-Bundle 'myusuf3/numbers.vim'
 Bundle 'Valloric/YouCompleteMe'
 
 " Rails development
@@ -60,6 +59,5 @@ Bundle "benmills/vimux"
 Bundle "dahu/LearnVim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-shell"
-Bundle "EnhCommentify.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "ctrlpvim/ctrlp.vim"
