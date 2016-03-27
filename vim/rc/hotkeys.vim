@@ -1,7 +1,7 @@
 " Tagbar Awesomeness
 nmap <F8> :TagbarToggle<CR>
 " Leader tag
-let mapleader = ","
+let mapleader = "\<Space>"
 let g:rspec_command = "Dispatch rspec {spec}"
 
 " Remap a bunch of standardized items
@@ -32,16 +32,19 @@ nmap <Leader>sv :Sview<CR>
 nmap <Leader>sm :Smodel<CR>
 nmap <Leader>sj :Sjavascript<CR>
 nmap <Leader>ss :Sstylesheet<CR>
+nmap <Leader>st :AS<CR>
 nmap <Leader>vc :Vcontroller<CR>
 nmap <Leader>vv :Vview<CR>
 nmap <Leader>vm :Vmodel<CR>
 nmap <Leader>vj :Vjavascript<CR>
 nmap <Leader>vs :Vstylesheet<CR>
+nmap <Leader>vt :AV<CR>
 nmap <Leader>rc :Rcontroller<CR>
 nmap <Leader>rv :Rview<CR>
 nmap <Leader>rm :Rmodel<CR>
 nmap <Leader>rj :Rjavascript<CR>
 nmap <Leader>rs :Rstylesheet<CR>
+nmap <Leader>rt :A<CR>
 nmap <Leader>en :e config/locales/en.yml<CR>
 
 " Tabs

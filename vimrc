@@ -60,8 +60,6 @@ endif
 
 au VimLeave * :!clear
 
-" Show line numbers
-set number
 "allow backspacing over everything in insert mode
 set bs=2
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
@@ -277,6 +275,7 @@ autocmd User Rails Rnavcommand worker app/workers -suffix=_worker.rb -default=mo
 
 set ruler
 set number
+set relativenumber
 set cursorline
 set laststatus=2 " Always show status bar
 set nowrap

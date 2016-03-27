@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy/mm/dd"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git git-extras git-flow git-flow-avh git-prompt gem capistrano bundler rails rvm ruby rake sudo wakeonlan debian tmux lol github cap)
+plugins=(git git-extras git-flow git-flow-avh git-prompt gem capistrano bundler rails rvm ruby rake sudo wakeonlan debian tmux lol github cap tmuxinator ubuntu gpg-agent emoji capistrano)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,6 +59,7 @@ export PATH="$PATH:/home/lightstalker/.bspwm:/usr/lib/lightdm/lightdm:/usr/local
 
 export EDITOR=vim
 export SHELL=zsh
+export GOPATH=$HOME/gocode
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin:$GOPATH/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
