@@ -4,6 +4,7 @@ require 'teamspeak-ruby'
 require 'yaml'
 require 'fifo'
 require 'json'
+require 'byebug'
 
 CONFIG="#{Dir.home}/.config/ts_monitor.yaml"
 CONKY_FILE="#{Dir.home}/.tmp/ts_online.txt"
@@ -17,7 +18,7 @@ CONKY_FILE="#{Dir.home}/.tmp/ts_online.txt"
 
 def connect
   if @ts == nil
-    @ts = Teamspeak.new(@config[:host][:server])
+    @ts = Teamspeak::Client.new(@config[:host][:server])
     @ts.login(@config[:host][:user], @config[:host][:password])
     @ts.command('use', {sid: @config[:host][:server_id]})
   end
@@ -34,9 +35,10 @@ end
 
 def get_client_list
   @old_clients = @clients
-  @channels = @ts.command('channellist')
+  @channels = {}
+  @ts.command('channellist').each { |c| @channels[c['cid']] = { name: c['channel_name'], pid: c['pid'] } }
   @clients = @ts.command('clientlist')
-  @clients.delete_if {|client| client['client_type'] != '0'} if @clients
+  @clients.delete_if {|client| client['client_type'] != 0} if @clients
 end
 
 def pause
@@ -78,34 +80,32 @@ def generate_notifications
 end
 
 def tie_users_to_channels
-  @clients.sort_by { |key| key['client_nickname'] }.each do |client|
-    channel = @channels.select { |key| key['cid'] == client['cid'] }[0]
-    (channel['users'] ||= []) << client
-  end
+  @clients.sort_by! { |key| key['client_nickname'] }
+  @channels.each { |k, v| v[:users] = @clients.select {|i| i['cid'] == k} }
 end
 
 def build_channel_list
   result = ''
   last_cid = []
   depth = 0
-  @channels.each do |c|
-    if c['pid'] == '0'
+  @channels.each do |k, c|
+    if c[:pid] == 0
       last_cid.clear
       depth = 0
-    elsif last_cid[-1] == c['pid']
+    elsif last_cid[-1] == c[:pid]
       # Do nothing
-    elsif last_cid.index(c['pid']) != nil
-      while !last_cid.empty? && last_cid.index(c['pid']) != nil
+    elsif last_cid.index(c[:pid]) != nil
+      while !last_cid.empty? && last_cid.index(c[:pid]) != nil
         depth -= 1
         last_cid.pop
       end
     else
-      last_cid << c['pid']
+      last_cid << c[:pid]
       depth += 1
     end
-    if c['users'] && !c['users'].empty?
-      result += "#{' ' * 2 * depth} = #{c['channel_name']}\n"
-      result += c['users'].map{ |user| "#{' ' * 2 * depth}  - #{user['client_nickname']}\n" }.sort.join
+    if c[:users] && !c[:users].empty?
+      result += "#{' ' * 2 * depth} = #{c[:name]}\n"
+      result += c[:users].map{ |user| "#{' ' * 2 * depth}  - #{user['client_nickname']}\n" }.sort.join
     end
   end
   result
