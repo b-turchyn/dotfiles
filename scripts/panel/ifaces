@@ -12,7 +12,7 @@
 ################################################################################
 
 while true ; do
-  internal=`ifconfig | grep "inet addr" | awk 'BEGIN{loopback="";actual=""}{c=split($0,a,"(\\\\:|\\\\s)+");if(match(a[4],"^127.")){loopback=a[4]}else{actual=a[4]}}END{if(actual==""){print loopback}else{print actual}}'`
+  internal=`ifconfig | grep "inet" | grep -v "inet6" | awk 'BEGIN{loopback="";actual=""}{c=split($0,a,"(\\\\:|\\\\s)+");if(match(a[3],"^127.") || match(a[3], "^172.")){loopback=a[3]}else{actual=a[3]}}END{if(actual==""){print loopback}else{print actual}}'`
   external=`curl -s icanhazip.com`
   echo "N$internal / $external"
   sleep 60
