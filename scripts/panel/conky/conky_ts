@@ -1,27 +1,30 @@
-out_to_x yes
-out_to_console no
-background yes
+conky.config = {
+	out_to_x = true,
+	out_to_console = false,
+	background = true,
 
-own_window yes
-own_window_class conky_ts
-own_window_type panel
-own_window_argb_visual yes
-own_window_argb_value 240
-# double_buffer yes
+	own_window = true,
+	own_window_class = 'conky_ts',
+	own_window_type = 'panel',
+	own_window_argb_visual = true,
+	own_window_argb_value = 240,
+-- double_buffer yes
 
-minimum_size 135 20
-alignment top_left
-gap_x 10
-gap_y 27
+	minimum_width = 135, minimum_height = 20,
+	alignment = 'top_left',
+	gap_x = 10,
+	gap_y = 27,
 
-own_window_colour 272822
-default_color F8F8F2
-border_width 1
+	own_window_colour = '#272822',
+	default_color = '#F8F8F2',
+	border_width = 1,
 
-use_xft no
-font -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
+	use_xft = false,
 
-update_interval 5
+	update_interval = 5,
 
-TEXT
+};
+
+conky.text = [[
 ${execp cat ~/.tmp/ts_online.txt}
+]];
