@@ -8,7 +8,7 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-FILES=`find $DIR/autostart -regex ".*/[0-9][0-9]\..*" -type f -perm -u+x | sort`
+FILES=`find $DIR/autostart -regex ".*/[0-9][0-9]\..*" -type f -perm -u+x | grep -v -e "\.disabled$" | sort`
 
 for f in $FILES
 do
