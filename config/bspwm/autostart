@@ -7,11 +7,14 @@ wmname BSPWM
 urxvtd &
 synergys --enable-crypto &
 ~/.scripts/autostart_apps &
+#~/.bspwm/bspwm_rules &
 # compton --config ~/.compton.conf --paint-on-overlay &
 # cairo-compmgr &
 
+xrandr --output HDMI-2 --auto --primary --rotate inverted --above HDMI-3
+xrandr --output HDMI-3 --auto --below HDMI-2
+
+screen -dmS redshift redshift -t 5500K:3000K -l 36:-90
+
 # Background image
 hsetroot -fill "/home/lightstalker/Pictures/wallpaper.png" &
-
-xrandr --output HDMI2 --auto --primary --rotate inverted --above HDMI3
-xrandr --output HDMI3 --auto --below HDMI2
