@@ -1,63 +1,66 @@
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 " Required for vundle
 
 " Tag Highlighting
-Bundle 'BenBergman/TagHighlight'
+Plugin 'BenBergman/TagHighlight'
 
 " Tag List
-Bundle 'majutsushi/tagbar'
-
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " UI Addons
-Bundle 'Lokaltog/powerline'
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Lokaltog/powerline'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
 
 " Rails development
-Bundle 'thoughtbot/vim-rspec'
-Bundle "tpope/vim-rails"
-Bundle 'tpope/vim-dispatch'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-dispatch'
 
 " VCS Integration
-Bundle 'tpope/vim-fugitive'
-Bundle 'mattn/gist-vim'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'vcscommand.vim'
-Bundle 'tpope/vim-git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mattn/gist-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vcscommand.vim'
+Plugin 'tpope/vim-git'
 
 " Color Schemes
-Bundle "altercation/vim-colors-solarized"
-Bundle "BenBergman/ir_black-custom"
+" Plugin 'BenBergman/ir_black-custom'
 
 " Text Formatting
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-speeddating'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'Align'
-Bundle 'keepcase.vim'
-Bundle 'eapache/rainbow_parentheses.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-speeddating'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Align'
+Plugin 'keepcase.vim'
+Plugin 'eapache/rainbow_parentheses.vim'
 
 " Syntax
-Bundle "Arduino-syntax-file"
-Bundle "chrisbra/color_highlight"
-Bundle "scrooloose/syntastic"
-Bundle "chrisbra/csv.vim"
-Bundle "tpope/vim-markdown"
-Bundle "kchmck/vim-coffee-script"
-Bundle "groenewege/vim-less"
+Plugin 'Arduino-syntax-file'
+Plugin 'chrisbra/color_highlight'
+"Plugin 'scrooloose/syntastic'
+Plugin 'chrisbra/csv.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'groenewege/vim-less'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'pangloss/vim-javascript'
 
 " Snippets
-Bundle 'SirVer/ultisnips'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/vim-snippets"
-Bundle "bonsaiben/bootstrap-snippets"
+Plugin 'SirVer/ultisnips'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'honza/vim-snippets'
+" Plugin 'bonsaiben/bootstrap-snippets'
 
 " Other
-Bundle "benmills/vimux"
-Bundle "dahu/LearnVim"
-Bundle "xolox/vim-misc"
-Bundle "xolox/vim-shell"
-Bundle "scrooloose/nerdtree"
-Bundle "ctrlpvim/ctrlp.vim"
+Plugin 'benmills/vimux'
+Plugin 'dahu/LearnVim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-shell'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+Plugin 'vimwiki/vimwiki'

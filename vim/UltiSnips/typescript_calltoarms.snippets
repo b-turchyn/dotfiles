@@ -1,0 +1,23 @@
+snippet sub "Subscribe no error"
+$1().subscribe(result => {
+  $0
+});
+endsnippet
+
+snippet sub2 "Subscribe with error"
+$1().subscribe(result => {
+  $0
+}, err => {
+  
+});
+endsnippet
+
+snippet sub3 "Subscribe with all options"
+$1().subscribe(result => {
+  $0
+}, err => {
+  
+}, {
+  
+});
+endsnippet

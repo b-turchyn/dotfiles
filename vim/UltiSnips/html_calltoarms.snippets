@@ -1,0 +1,34 @@
+snippet card "Bootstrap Card"
+<div class="card">
+  ${1:<img src="..." class="card-img-top" alt="...">}
+    <div class="card-body">
+      <h5 class="card-title">${2:Card title}</h5>
+      <p class="card-text">${3:Card Content}</p>
+  </div>
+</div>
+endsnippet
+
+snippet ctacheck "CallToAr.ms Checkbox"
+<cta-checkbox id="$1" formControlName="$2">$0</cta-checkbox>
+endsnippet
+
+snippet col "Full Width Column"
+<div class="col">$0</div>
+endsnippet
+
+snippet container "cta-main-container"
+<cta-main-container>
+  $0
+</cta-main-container>
+endsnippet
+
+snippet gamelist "Game List"
+<cta-game-list [games]="${1:games}"${2: [horizontalScroll]="true"}></cta-game-list>
+endsnippet
+
+snippet row "Row"
+<div class="row">
+  $0
+</div>
+endsnippet
+

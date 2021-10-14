@@ -1,7 +1,7 @@
 set nocompatible " Required for Vundle awesomeness
 filetype off     " Required for Vundle awesomeness
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " OS Declaration
 try
@@ -237,6 +237,7 @@ au BufReadPost *.gpg :%!gpg -d 2>/dev/null
 au BufWritePre *.gpg :%!gpg -e -r 'P@draigBrady.com' 2>/dev/null
 au BufWritePost *.gpg u
 
+call vundle#end()
 filetype on
 filetype plugin indent on
 
@@ -263,16 +264,6 @@ augroup Python
     endif
 augroup END
 
-autocmd User Rails Rnavcommand decorator app/decorators -suffix=_decorator.rb -default=model()
-autocmd User Rails Rnavcommand presenter app/presenters -suffix=_presenter.rb -default=model()
-autocmd User Rails Rnavcommand uploader app/uploaders -suffix=_uploader.rb -default=model()
-autocmd User Rails Rnavcommand steps features/step_definitions -suffix=_steps.rb -default=web
-autocmd User Rails Rnavcommand factory spec/factories -suffix=_factory.rb -default=model()
-autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
-autocmd User Rails Rnavcommand feature features -suffix=.feature -default=cucumber
-autocmd User Rails Rnavcommand support spec/support features/support -default=env
-autocmd User Rails Rnavcommand worker app/workers -suffix=_worker.rb -default=model()
-
 set ruler
 set number
 set relativenumber
@@ -298,3 +289,21 @@ if &term =~ "xterm"
     let &t_Sb=nr2char(27).'[4%dm'
   endif
 endif
+
+" Ignore any files in .gitignore for |ctrlp-options|
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+let g:syntastic_typescript_checkers = ["eslint"]
+let g:syntastic_typescript_eslint_exe = "ng"
+let g:syntastic_typescript_eslint_args = "lint --files"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1

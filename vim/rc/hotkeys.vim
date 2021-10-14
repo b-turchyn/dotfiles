@@ -1,5 +1,3 @@
-" Tagbar Awesomeness
-nmap <F8> :TagbarToggle<CR>
 " Leader tag
 let mapleader = "\<Space>"
 let g:rspec_command = "Dispatch rspec {spec}"
@@ -21,11 +19,9 @@ nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
 nnoremap <Leader>l <C-w>l
 
-" Numbers.vim
-nnoremap <F3> :NumbersToggle<CR>
-
 " Rails Support
 map <Leader>rr :e config/routes.rb<CR>
+map <Leader>rd :e db/schema.rb<CR>
 map <Leader>rb :e Gemfile<CR>
 nmap <Leader>sc :Scontroller<CR>
 nmap <Leader>sv :Sview<CR>
@@ -39,11 +35,11 @@ nmap <Leader>vm :Vmodel<CR>
 nmap <Leader>vj :Vjavascript<CR>
 nmap <Leader>vs :Vstylesheet<CR>
 nmap <Leader>vt :AV<CR>
-nmap <Leader>rc :Rcontroller<CR>
-nmap <Leader>rv :Rview<CR>
-nmap <Leader>rm :Rmodel<CR>
-nmap <Leader>rj :Rjavascript<CR>
-nmap <Leader>rs :Rstylesheet<CR>
+nmap <Leader>rc :Econtroller<CR>
+nmap <Leader>rv :Eview<CR>
+nmap <Leader>rm :Emodel<CR>
+nmap <Leader>rj :Ejavascript<CR>
+nmap <Leader>rs :Estylesheet<CR>
 nmap <Leader>rt :A<CR>
 nmap <Leader>en :e config/locales/en.yml<CR>
 
