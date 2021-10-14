@@ -1,0 +1,47 @@
+# ~/.tmuxinator/calltoarms.yml
+
+name: calltoarms
+root: ~/dev/calltoarms
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+pre_window: rvm rvmrc load
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - frontend:
+      root: ~/dev/calltoarms/frontend
+      layout: main-vertical
+      panes:
+        - vim
+        - ng serve --public-host=calltoarms.local
+        - CHROME_BIN=chromium-browser ng test
+  - backend:
+      root: ~/dev/calltoarms/backend
+      layout: main-vertical
+      panes:
+        - vim
+        - guard
+  - console:
+      root: ~/dev/calltoarms/backend
+      panes:
+        - bundle exec rails c
+  - fe-cmd:
+      root: ~/dev/calltoarms/frontend
+      panes:
+        -
+  - be-cmd:
+      root: ~/dev/calltoarms/backend
+      panes:
+        -
