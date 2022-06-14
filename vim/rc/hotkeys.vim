@@ -52,6 +52,7 @@ map <Leader>tl :tablast<CR>
 
 " CtrlP.Vim - Make default Mixed Mode
 nmap <c-P> :CtrlPBufTag<CR>
+nmap <silent> <Leader>p <Plug>(CommandT)
 
 " Encouragement to add more leader commands
 map <Leader>hk :tabnew<CR>:e ~/.vim/rc/hotkeys.vim<CR>

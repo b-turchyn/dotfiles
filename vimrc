@@ -234,7 +234,7 @@ endif
 " a passphrase directly with symmetric encryption in the gpg commands below.
 au BufNewFile,BufReadPre *.gpg :set secure viminfo= noswapfile nobackup nowritebackup history=0 binary
 au BufReadPost *.gpg :%!gpg -d 2>/dev/null
-au BufWritePre *.gpg :%!gpg -e -r 'P@draigBrady.com' 2>/dev/null
+au BufWritePre *.gpg :%!gpg -e -r '2FA7BF8F1EE794C8D87E7E35E7113AAD56A626E5' 2>/dev/null
 au BufWritePost *.gpg u
 
 call vundle#end()
@@ -292,6 +292,7 @@ endif
 
 " Ignore any files in .gitignore for |ctrlp-options|
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:CommandTFileScanner = "git"
 
 let g:syntastic_typescript_checkers = ["eslint"]
 let g:syntastic_typescript_eslint_exe = "ng"

@@ -61,6 +61,5 @@ Plugin 'dahu/LearnVim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-shell'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-
-Plugin 'vimwiki/vimwiki'
+" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'wincent/command-t'
