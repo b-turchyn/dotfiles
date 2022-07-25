@@ -83,6 +83,9 @@ endif
 set nowrap
 "Usually I don't care about case when searching
 set smartcase
+" Spelling support
+set spell
+set spelllang=en_ca " Eh?
 "Show menu with possible tab completions
 set wildmenu
 "Ignore these files when completing names and in Explorer
