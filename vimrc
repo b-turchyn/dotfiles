@@ -293,6 +293,7 @@ endif
 " Ignore any files in .gitignore for |ctrlp-options|
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:CommandTFileScanner = "git"
+let g:CommandTGitIncludeUntracked = 1
 
 let g:syntastic_typescript_checkers = ["eslint"]
 let g:syntastic_typescript_eslint_exe = "ng"
