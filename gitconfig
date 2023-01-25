@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Brian Turchyn
+	email = brian@dj-bri-t.net
+	signingkey = 6498BD5875B0C4F4E55288AA134915D147923FCC
+[commit]
+	gpgSign = true
+[pull]
+	rebase = false
