@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/home/lightstalker/.bspwm:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$PATH:/home/lightstalker/.bspwm:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/lightstalker/dwm/powerline/scripts"
 
 export EDITOR=vim
 export SHELL=zsh
@@ -63,7 +63,11 @@ export GOPATH=$HOME/gocode
 
 PATH=$PATH:$HOME/.rvm/bin:$GOPATH/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+<<<<<<< Updated upstream
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+=======
+export PATH="$(brew --prefix qt)/bin:$PATH"
+>>>>>>> Stashed changes

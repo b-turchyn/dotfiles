@@ -14,3 +14,5 @@ set -g status-left '#[fg=white,bg=brightcyan,bold] ❐ #S #[fg=brightcyan,bg=bri
 set -g window-status-format "#[fg=yellow,bg=brightwhite] #I #W "
 set -g window-status-current-format "#[fg=brightwhite,bg=yellow]⮀#[fg=brightwhite,bg=yellow,noreverse,bold] #I ⮁ #W #[fg=yellow,bg=brightwhite,nobold]⮀"
 set -g status-right "#(wemux status_users)"
+
+setw -g aggressive-resize off

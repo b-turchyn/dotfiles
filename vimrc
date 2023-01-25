@@ -1,6 +1,7 @@
 set nocompatible " Required for Vundle awesomeness
 filetype off     " Required for Vundle awesomeness
 set rtp+=~/.vim/bundle/Vundle.vim
+let g:CommandTPreferredImplementation='lua'
 call vundle#begin()
 
 " OS Declaration
@@ -10,10 +11,11 @@ catch
 endtry
 
 " Offload bundle declaration into another file for clean RC
-try
+"try
   source ~/.vim/rc/bundle.vim
-catch
-endtry
+"catch
+"endtry
+call vundle#end()
 
 " Hotkeys!!!
 try
@@ -240,7 +242,6 @@ au BufReadPost *.gpg :%!gpg -d 2>/dev/null
 au BufWritePre *.gpg :%!gpg -e -r '2FA7BF8F1EE794C8D87E7E35E7113AAD56A626E5' 2>/dev/null
 au BufWritePost *.gpg u
 
-call vundle#end()
 filetype on
 filetype plugin indent on
 
@@ -312,3 +313,8 @@ let g:syntastic_check_on_wq = 0
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+"
+" Dart/Flutter configurations
+let dart_html_in_string=v:true " Syntax highlight HTML 
+let g:dart_style_guide = 2 " 2-space indentation
+let g:dart_format_on_save = 1 " Auto-format when saving
