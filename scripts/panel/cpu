@@ -1,7 +1,0 @@
-#!/bin/bash
-
-while true ; do
-  cpu_value=`top -bn 3 -d 0.5 | grep '^%Cpu' | tail -n 1 | gawk '{print $2+$4+$6}'`
-  echo "C`echo $cpu_value | xargs printf "%04.1f"`"
-  sleep 2
-done
