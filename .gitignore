@@ -1,5 +1,6 @@
-vim/swap/*
-vim/undodir/*
-vim/backup/*
-vim/bundle/*/
-vim/.netrwhist
+.vim/swap/*
+.vim/undodir/*
+.vim/backup/*
+.vim/bundle/*/
+.vim/.netrwhist
+.config/tmux/plugins/*

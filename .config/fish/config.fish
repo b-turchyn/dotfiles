@@ -6,26 +6,25 @@ fish_add_path ~/.local/share/pnpm/bin
 
 # Git shortcuts (interactive abbreviations; they expand before execution).
 if status is-interactive
+    # git
     abbr --add ga 'git add'
     abbr --add gb 'git branch'
     abbr --add gc 'git commit'
-    abbr --add gl 'git pull'
-    abbr --add gsw 'git switch'
-    abbr --add gswc 'git switch --create'
-    abbr --add glol 'git log --graph --decorate --oneline'
-    abbr --add glola 'git log --graph --decorate --oneline --all'
-
-    # Handy everyday companions.
-    abbr --add gst 'git status --short --branch'
+    abbr --add gco 'git checkout'
+    abbr --add gcp 'git cherry-pick'
     abbr --add gd 'git diff'
     abbr --add gds 'git diff --staged'
-    abbr --add gco 'git checkout'
+    abbr --add gl 'git pull'
+    abbr --add glol 'git log --graph --decorate --oneline'
+    abbr --add glola 'git log --graph --decorate --oneline --all'
     abbr --add gp 'git push'
     abbr --add gpf 'git push --force-with-lease'
-    abbr --add gup 'git pull --rebase'
+    abbr --add gst 'git status --short --branch'
     abbr --add gsta 'git stash push'
     abbr --add gstp 'git stash pop'
-    abbr --add gcp 'git cherry-pick'
+    abbr --add gsw 'git switch'
+    abbr --add gswc 'git switch --create'
+    abbr --add gup 'git pull --rebase'
 end
 
 # overwrite greeting
